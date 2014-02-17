@@ -5,7 +5,7 @@ module Main where
 import Test.Hspec
 import Test.QuickCheck
 
-import Stack
+import CovenantEyes.Nestify.Stack
 
 
 instance Arbitrary a => Arbitrary (Stack a) where

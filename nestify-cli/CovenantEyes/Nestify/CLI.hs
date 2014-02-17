@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE FlexibleInstances #-}
 
-module Main where
+module CovenantEyes.Nestify.CLI where
 
 import Data.List (intercalate)
 import Data.List.Split (splitOn)
@@ -10,7 +10,7 @@ import Options.Applicative
 
 import Paths_nestify (version)
 
-import Nestify (nestify)
+import CovenantEyes.Nestify (nestify)
 
 
 data CmdOptions = CmdOptions
@@ -18,7 +18,7 @@ data CmdOptions = CmdOptions
 
 
 (<$$>) :: (Functor f, Functor f1) => (a -> b) -> f (f1 a) -> f (f1 b)
-(<$$>) = fmap . fmap
+(<$$>) = fmap fmap fmap
 
 
 cmdOptions :: Parser CmdOptions
@@ -39,7 +39,14 @@ addVersion = infoOption ("nestify version " ++ showVersion version)
 
 
 go :: CmdOptions -> IO ()
-go (CmdOptions delim) = interact $ unlines . (intercalate delim <$>) . nestify . (splitOn delim <$>) . lines
+go (CmdOptions delim) = interact $ unlines . (intercalate delim <$>) . nestifyStr . (splitOn delim <$>) . lines
+
+
+nestifyStr :: [[String]] -> [[String]]
+nestifyStr = postProcess . nestify
+  where
+    postProcess (result, danglers) = result ++ (annotate <$> danglers)
+      where annotate = (:[]) . ("-> Dangling: " ++)
 
 
 main :: IO ()

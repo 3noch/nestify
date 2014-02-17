@@ -1,4 +1,4 @@
-module Stack
+module CovenantEyes.Nestify.Stack
   ( Stack(..)
   , emptyStack
   , push
