@@ -2,14 +2,14 @@
 -- documentation, see http://haskell.org/cabal/users-guide/
 
 name:                nestify
-version:             0.1.1.0
+version:             0.1.1.1
 synopsis:            Transforms flat stack traces into indented stack traces
 -- description:
 license:             MIT
 license-file:        LICENSE
 author:              Elliot Cameron
 maintainer:          eacameron@gmail.com
-copyright:           Covenant Eyes 2014
+copyright:           Covenant Eyes 2015
 category:            Development
 build-type:          Simple
 -- extra-source-files:
@@ -21,7 +21,7 @@ library
 
   -- other-modules:
 
-  build-depends:       base >=4.6 && <4.7,
+  build-depends:       base >=4.6 && <4.8,
                        split,
                        text,
                        optparse-applicative
@@ -34,7 +34,7 @@ executable nestify
   main-is:             Main.hs
   other-modules:       CovenantEyes.Nestify.CLI
   -- other-extensions:
-  build-depends:       base >=4.6 && <4.7,
+  build-depends:       base >=4.6 && <4.8,
                        nestify,
                        split,
                        text,
